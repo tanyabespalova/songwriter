@@ -1,0 +1,7 @@
+
+<h1>Добавить жанр</h1>
+<p><%= link_to "Назад", admin_genres_path %></p>
+<%= form_for [:admin, @genre] do |genre| %>
+  <p>Название: <%= genre.text_field :name %></p>
+  <p><%= genre.submit "Создать" %></p>
+<% end %>

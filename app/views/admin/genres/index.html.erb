@@ -1,0 +1,9 @@
+<h1>Жанры</h1>
+<p><%= link_to "Добавить", new_admin_genre_path %></p>
+<% if @genres.empty? %>
+<b>Нет жанров</b>
+<% else %>
+  <% @genres.each do |genre| %>
+  <h3><%= link_to genre.name, admin_genre_path(genre) %></h3>
+  <% end %>
+<% end %>

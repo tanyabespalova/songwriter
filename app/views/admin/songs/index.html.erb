@@ -1,0 +1,9 @@
+<h1>Песни </h1>
+<p><%= link_to "Добавить новую песню", new_admin_song_path %></p>
+<% if @songs.empty? %>
+  <b>Нет песен</b>
+<% else %>
+  <% @songs.each do |songs| %>
+    <h3><%= link_to songs.title, admin_song_path(songs) %>(<%= songs.artist.singer %>)</h3>
+  <% end %>
+<% end %>

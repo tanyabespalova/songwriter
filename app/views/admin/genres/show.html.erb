@@ -1,0 +1,10 @@
+
+
+<h2><%= @genre.name %></h2>
+
+<p><%= link_to "Редактировать", edit_admin_genre_path %></p>
+<p><%= link_to "Удалить", admin_genre_path(@genre), method: :delete, data: { confirm: "Точно удалить?" } %></p>
+<h1>Группы</h1>
+<% @genre.artists.each do |artist| %>
+  <p><%= link_to artist.singer, admin_artist_path(artist) %></p>
+<% end %>

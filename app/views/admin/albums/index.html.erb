@@ -1,0 +1,9 @@
+<h1>Альбомы </h1>
+<p><%= link_to "Добавить", new_admin_album_path %></p>
+<% if @albums.empty? %>
+  <b>Нет групп</b>
+<% else %>
+  <% @albums.each do |albums| %>
+    <h3><%= link_to albums.name , admin_album_path(albums)%></h3>
+  <% end %>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Группы </h1>
+<% if @artists.empty? %>
+  <b>Нет групп</b>
+<% else %>
+  <% @artists.each do |artists| %>
+    <h3><%= link_to artists.singer , artist_path(artists)%></h3>
+  <% end %>
+<% end %>

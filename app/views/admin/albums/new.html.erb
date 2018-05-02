@@ -1,0 +1,8 @@
+<h1>Добавить новый альбом</h1>
+<p><%= link_to "Ко всем", admin_albums_path %></p>
+<%= form_for [:admin, @album] do |album| %>
+  <p>Исполнитель: <br/> <%= album.select :artist_id, Artist.all.order(:id).pluck(:singer, :id) %></p>
+  <p>Название: <br/> <%= album.text_field :name %></p>
+  <p>Год выпуска: <br/> <%= album.text_field :year %></p>
+  <p><%= album.submit "Создать" %></p>
+<% end %>

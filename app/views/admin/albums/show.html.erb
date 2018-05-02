@@ -1,0 +1,12 @@
+<p><%= link_to "Все альбомы", admin_albums_path %></p>
+<h2><%= @album.name %></h2>
+<p>Год выпуска: <%= @album.year %></p>
+<p><%= link_to @album.artist.singer, admin_artist_path%></p>
+<p><%= link_to "Редактировать", edit_admin_album_path %></p>
+<p><%= link_to "Удалить", admin_album_path(@album), method: :delete, data: { confirm: "Точно удалить?" } %></p>
+<h2>Песни</h2>
+<% @album.songs.each do |song| %>
+  <p><%= link_to song.title, admin_song_path(song) %></p>
+<% end %>
+
+

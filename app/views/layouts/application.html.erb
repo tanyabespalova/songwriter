@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Songwriter</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Songwriter</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/genres">Жанры</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/artists">Исполнители</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/albums">Альбомы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/songs">Песни</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+      <ul class="nav nav-pills">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: aliceblue"><%= current_user.email %></a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/persons/profile">Моя страница</a>
+                <% if current_user.admin? %>
+                  <a class="dropdown-item" href="/admin">Админ</a>
+                <% end %>
+                <div role="separator" class="dropdown-divider"></div>
+                <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/sign_in">Войти</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/sign_up">Зарегистрироваться</a>
+            </li>
+          <% end %>
+        </ul>
+    </nav>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+
+
+
+<!--<p class="notice"><%#= notice %></p>-->
+<!--<p class="alert"><%#= alert %></p>-->
+<%# if user_signed_in? %>
+<!--  <span>Здравствуйте, <%#= current_user.email %></span>-->
+  <%#= link_to 'Профиль', persons_profile_path %>
+  <%#= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+  <%# if current_user.admin? %>
+    <%#= link_to 'Админка', admin_root_path %>
+  <%# end %>
+<%# else %>
+<!--  <%#= link_to 'Войти', new_user_session_path %> или <%#= link_to 'Зарегистрироваться', new_user_registration_path %>-->
+<%# end %>

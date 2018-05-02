@@ -1,0 +1,39 @@
+<p><%= link_to "Все альбомы", albums_path %></p>
+<h2><%= @album.name %></h2>
+<p>Год выпуска: <%= @album.year %></p>
+<p><%= link_to @album.artist.singer, artist_path%></p>
+<h2>Песни</h2>
+<% @album.songs.each do |song| %>
+  <p><%= link_to song.title, song_path(song) %></p>
+<% end %>
+
+<h2>Комментарии</h2>
+<% if @album.comments.empty? %>
+  <b>Нет комментарий</b>
+<% else %>
+  <% @album.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.email %>:</strong>
+      <%= comment.body %>
+    </p>
+  <% end %>
+<% end %>
+
+<h2>Добавить комментарий:</h2>
+<% if user_signed_in? %>
+  <%= form_with(model: [ @album, @album.comments.build ], local: true) do |form| %>
+    <%= form.hidden_field(:user_id, value: current_user.id) %>
+    <%= form.hidden_field(:commentable_id, value: @album.id) %>
+    <%= form.hidden_field(:commentable_type, value: Album) %>
+    <p>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit "добавить" %>
+    </p>
+  <% end %>
+<% else %>
+<p>Подалуйста авторизуйтесь, чтобы оставить комментарий</p>
+<%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>
+

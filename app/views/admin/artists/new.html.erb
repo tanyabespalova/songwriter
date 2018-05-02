@@ -1,0 +1,9 @@
+
+<h1>Добавить нового исполнителя</h1>
+<p><%= link_to "Ко всем группам", admin_artists_path %></p>
+<%= form_for [:admin, @artist] do |a| %>
+  <p>Жанр: <br/> <%= a.select(:genre_ids, Genre.all.order(:id).pluck(:name, :id), {}, multiple: true) %></p>
+  <p>Исполнитель: <br/> <%= a.text_field :singer %></p>
+  <p>Описание: <br/> <%= a.text_area :description %></p>
+  <p><%= a.submit "Создать" %></p>
+<% end %>

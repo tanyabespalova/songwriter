@@ -1,0 +1,29 @@
+<h2>Комментарии</h2>
+<% if @song.comments.empty? %>
+  <b>Нет комментарий</b>
+<% else %>
+  <% @song.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.email %>:</strong>
+      <%= comment.body %>
+    </p>
+  <% end %>
+<% end %>
+
+<h2>Добавить комментарий:</h2>
+<% if user_signed_in? %>
+<%= form_with(model: [ @song, @song.comments.build ], local: true) do |form| %>
+  <%= form.hidden_field(:user_id, value: current_user.id) %>
+  <%= form.hidden_field(:commentable_id, value: @song.id) %>
+  <%= form.hidden_field(:commentable_type, value: Song) %>
+  <p>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit "добавить" %>
+  </p>
+<% end %>
+<% else %>
+  <p>Подалуйста авторизуйтесь, чтобы оставить комментарий</p>
+  <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>

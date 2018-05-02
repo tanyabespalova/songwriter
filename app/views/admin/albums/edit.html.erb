@@ -1,0 +1,11 @@
+<p>Редактировать</p>
+<p><%= link_to "Назад", admin_album_path %></p>
+<%= form_for [:admin, @album] do |f| %>
+  <p>Исполнитель: <br/> <%= f.select :artist_id, Album.all.order(:id).pluck(:name, :id) %></p>
+  <p>Название: <br/> <%= f.text_field :name %></p>
+  <p>Год выпуска: <br/> <%= f.text_field :year %></p>
+  <p><%= f.submit "Сохранить"%></p>
+<% end %>
+
+
+

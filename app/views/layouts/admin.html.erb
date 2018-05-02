@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Songwriter - Admin</title>
+
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Songwriter</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/genres">Жанры</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/artists">Исполнители</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/albums">Альбомы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/songs">Песни</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+    <ul class="nav nav-pills">
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/persons/profile">Моя страница</a>
+            <% if current_user.admin? %>
+              <%= link_to 'На сайт', root_path, class: 'dropdown-item' %>
+            <% end %>
+            <div role="separator" class="dropdown-divider"></div>
+            <%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_in">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_up">Зарегистрироваться</a>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</head>
+
+<body>
+<%= yield %>
+</body>
+</html>

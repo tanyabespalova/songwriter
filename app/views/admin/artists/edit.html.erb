@@ -1,0 +1,13 @@
+
+<p><%= link_to "Ко всем группам", admin_artists_path %></p>
+<p>Редактировать</p>
+<p><%= link_to "Назад", admin_artist_path %></p>
+<%= form_for [:admin, @artist] do |f| %>
+<p>Жанр: <br/> <%= f.select(:genre_ids, Genre.all.order(:id).pluck(:name, :id), {}, multiple: true)  %></p>
+  <p>Исполнитель: <br/> <%= f.text_area :singer %></p>
+  <p>Описание: <br/> <%= f.text_area :description %></p>
+  <p><%= f.submit "Сохранить"%></p>
+
+<% end %>
+
+

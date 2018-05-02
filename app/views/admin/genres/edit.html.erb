@@ -1,0 +1,6 @@
+<p>Редактировать</p>
+<p><%= link_to "Назад", admin_genre_path %></p>
+<%= form_for [:admin, @genre] do |genre| %>
+  <p>Название: <br/> <%= genre.text_field :name %></p>
+  <p><%= genre.submit "Сохранить"%></p>
+<% end %>

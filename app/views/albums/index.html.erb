@@ -1,0 +1,8 @@
+<h1>Альбомы </h1>
+<% if @albums.empty? %>
+  <b>Нет групп</b>
+<% else %>
+  <% @albums.each do |albums| %>
+    <h3><%= link_to albums.name, album_path(albums)%> (<%= albums.artist.singer %>)</h3>
+  <% end %>
+<% end %>

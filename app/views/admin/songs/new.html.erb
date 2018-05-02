@@ -1,0 +1,9 @@
+<h1>Добавить новоую песню</h1>
+<p><%= link_to "Ко всем песням", admin_songs_path %></p>
+<%= form_for [:admin, @song] do |song| %>
+  <p>Исполнитель: <br/> <%= song.select :artist_id, @artists.order(:id).pluck(:singer, :id) %></p>
+  <p>Альбом: <br/> <%= song.select :album_id, Album.all.order(:id).pluck(:name, :id) %></p>
+  <p>Название: <br/> <%= song.text_field :title %></p>
+  <p>Текст песни: <br/> <%= song.text_area :text %></p>
+  <p><%= song.submit "Добавить" %></p>
+<% end %>

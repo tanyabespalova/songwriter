@@ -1,0 +1,9 @@
+<h1>Группы </h1>
+<p><%= link_to "Добавить", new_admin_artist_path %></p>
+<% if @artists.empty? %>
+  <b>Нет групп</b>
+<% else %>
+  <% @artists.each do |artists| %>
+    <h3><%= link_to artists.singer , admin_artist_path(artists)%></h3>
+  <% end %>
+<% end %>

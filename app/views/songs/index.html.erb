@@ -1,0 +1,8 @@
+<h1>Песни </h1>
+<% if @songs.empty? %>
+  <b>Нет песен</b>
+<% else %>
+  <% @songs.each do |songs| %>
+    <h3><%= link_to songs.title, song_path(songs) %> (<%= songs.artist.singer %>)</h3>
+  <% end %>
+<% end %>

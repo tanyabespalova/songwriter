@@ -1,0 +1,13 @@
+<p><%= link_to "Ко всем группам", admin_artists_path %></p>
+<h2><%= @artist.singer %></h2>
+<p><%= @artist.genres.map { |genre| link_to genre.name, admin_genre_path(genre) }.join(', ').html_safe %></p>
+<p><%= @artist.description %></p>
+<p><%= link_to "Редактировать", edit_admin_artist_path %></p>
+<p><%= link_to "Удалить", admin_artist_path(@artist), method: :delete, data: { confirm: "Точно удалить?" } %></p>
+<h2>Песни</h2>
+<% @artist.songs.each do |song| %>
+  <p><%= link_to song.title, admin_song_path(song) %></p>
+<% end %>
+
+
+

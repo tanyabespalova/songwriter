@@ -1,0 +1,13 @@
+<p><%= link_to "Все песни", songs_path %></p>
+<h2><%= @song.title %></h2>
+<p><%= link_to @song.artist.singer, artist_path%></p>
+<% if @song.album %>
+  <p><%= link_to @song.album.name, album_path(@song.album) %></p>
+<% else %>
+  <b>Нет альбома</b>
+<% end %>
+<p><%= @song.text %></p>
+
+
+<%= render partial: "partials/comment" %>
+

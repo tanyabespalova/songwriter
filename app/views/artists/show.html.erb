@@ -1,0 +1,39 @@
+<p><%= link_to "Ко всем группам", artists_path %></p>
+<h2><%= @artist.singer %></h2>
+<p><%= @artist.genres.map { |genre| link_to genre.name, genre_path(genre) }.join(', ').html_safe %></p>
+<p><%= @artist.description %></p>
+<h2>Песни</h2>
+<% @artist.songs.each do |song| %>
+  <p><%= link_to song.title, song_path(song) %></p>
+<% end %>
+
+<h2>Комментарии</h2>
+<% if @artist.comments.empty? %>
+  <b>Нет комментарий</b>
+<% else %>
+  <% @artist.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.email %>:</strong>
+      <%= comment.body %>
+    </p>
+  <% end %>
+<% end %>
+
+<h2>Добавить комментарий:</h2>
+<% if user_signed_in? %>
+  <%= form_with(model: [ @artist, @artist.comments.build ], local: true) do |form| %>
+    <%= form.hidden_field(:user_id, value: current_user.id) %>
+    <%= form.hidden_field(:commentable_id, value: @artist.id) %>
+    <%= form.hidden_field(:commentable_type, value: Artist) %>
+    <p>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit "добавить" %>
+    </p>
+  <% end %>
+<% else %>
+  <p>Подалуйста авторизуйтесь, чтобы оставить комментарий</p>
+  <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>
+
